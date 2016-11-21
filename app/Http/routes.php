@@ -14,3 +14,18 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+
+Route::post('/test', 'MessageController@test')->name('message.show');
+
+if(App::environment('local')) {
+
+    Route::get('/drop', function() {
+
+        DB::statement('DROP database friendlyMessenger');
+        DB::statement('CREATE database friendlyMessenger');
+
+        return 'Dropped friendlyMessenger; created friendlyMessenger.';
+    });
+
+};

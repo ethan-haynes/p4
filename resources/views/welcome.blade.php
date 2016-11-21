@@ -4,7 +4,6 @@
         <title>Laravel</title>
 
         <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
         <style>
             html, body {
                 height: 100%;
@@ -41,5 +40,9 @@
                 <div class="title">Laravel 5</div>
             </div>
         </div>
+        <input type="hidden" id="token" value="{{ csrf_token() }}">
+
+        <script src="{{asset('../js/jquery-3.1.1.min.js')}}"></script>
+        <script src="{{asset('../js/main.js')}}"></script>
     </body>
 </html>

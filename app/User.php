@@ -6,6 +6,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
+    public function user() {
+        # Author has many Books
+        # Define a one-to-many relationship.
+        return $this->hasMany('App\Message');
+    }
+
     /**
      * The attributes that are mass assignable.
      *
