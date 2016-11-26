@@ -1,0 +1,153 @@
+/* Google Fonts */
+@font-face {
+  font-family: 'Ubuntu';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Ubuntu'), url(../fonts/Ubuntu/Ubuntu-Regular.ttf) format('truetype');
+}
+
+@media screen and (max-width: 480px) {
+ li[role="presentation"] a { font-size:12px; }
+ body, html { font-size: 10px;}
+ footer { visibility: hidden;}
+}
+
+html, body {
+    height: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    background-color: #DBEAFE;
+}
+
+body {
+    width: 100%;
+    display: table;
+    font-weight: 100;
+    font-family: 'Ubuntu', sans-serif;
+    color: #7B7B7B;
+}
+
+li {
+    list-style-type: none;
+}
+
+hr {
+    margin-left: 5em;
+    margin-right: 2em;
+}
+
+li[role="presentation"] a {
+    color: #DBEAFE;
+}
+
+li[role="presentation"] a:hover {
+    background-color: #5CA7F2;
+    color: #636AA2;
+}
+
+#localeValue, #paymentInfo {
+    visibility: hidden;
+}
+
+.navbar {
+    background-color: #5CA7F2;
+}
+
+.container {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.content {
+    text-align: center;
+    display: inline-block;
+}
+
+.inner {
+
+    display: inline-block;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+.inner div {
+    padding-left: 3rem;
+    padding-bottom: 1rem;
+}
+
+.title {
+    font-size: 96px;
+    color: #636AA2;
+}
+
+.half-line, .line {
+    background-color: lightgray;
+    height: 2px;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.line {
+    width: 25em;
+}
+
+.half-line {
+    width: 15em;
+}
+
+.circle {
+    border-radius: 10em;
+    height: 2em;
+    width: 2em;
+    background-color: #9FCBF7;
+    margin-left: 2em;
+}
+
+.article-title {
+    font-size: 30px;
+    margin: 0 auto;
+}
+
+.img-container {
+    border: 2px solid #636AA2;
+    width: 19em;
+}
+
+.divider {
+    background-color: #5CA7F2;
+    height: 10em;
+    width: 100%;
+}
+
+.note {
+    color: #D73242;
+}
+
+footer {
+    top: 95%;
+    position: fixed;
+}
+
+div .chat-container {
+    width: 400px;
+    height: 250px;
+    overflow: scroll;
+    padding-left: 0;
+}
+
+div .user {
+    text-align: right;
+    padding-left: 0;
+}
+
+div .other-users {
+    text-align: left;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+/*# sourceMappingURL=style.css.map */

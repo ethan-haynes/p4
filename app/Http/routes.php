@@ -11,12 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', function () { return view('welcome')->with('title', "Friendly Messenger"); });
+Route::get('/chatroom', function () { return view('chatroom')->with('title', "Friendly Messenger Chatroom"); });
 
 
 Route::post('/test', 'MessageController@test')->name('message.show');
+Route::post('/getTest', 'MessageController@getTest')->name('message.get');
 
 if(App::environment('local')) {
 
@@ -27,5 +27,4 @@ if(App::environment('local')) {
 
         return 'Dropped friendlyMessenger; created friendlyMessenger.';
     });
-
 };

@@ -18,6 +18,7 @@ class MessagesTableSeeder extends Seeder
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
             'message' => 'this is a test!',
             'user_id' => $user_id,
+            'recieved' => false
         ]);
     }
 }

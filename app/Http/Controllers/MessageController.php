@@ -5,6 +5,8 @@ namespace p4\Http\Controllers;
 use Illuminate\Http\Request;
 
 use p4\Http\Requests;
+use p4\Message;
+use p4\User;
 
 class MessageController extends Controller
 {
@@ -53,9 +55,31 @@ class MessageController extends Controller
     }
 
     public function test(Request $request) {
-        // $test = Input::get('test');
 
-        return $request->input('test');;
+        $text = $request->input('message');
+        $user_id = User::where('user_name','=','friendly')->pluck('id')->first();
+
+        $message = new Message();
+        $message->user_id = $user_id;
+        $message->message = $text;
+        $message->recieved = false;
+        $message->save();
+
+        return $message;
+    }
+
+    public function getTest(Request $request) {
+        $user = User::where('user_name','=','friendly')->first();
+        $last_message = $user->last_message;
+        if ($last_message) {
+            $messages = Message::where('id','>=',$last_message)->orderBy('id', 'ASC')->limit(30)->get();
+        } else {
+            $messages = Message::orderBy('id', 'ASC')->first();
+            $user->last_message = $messages->id;
+            $user->save();
+        }
+
+        return $messages;
     }
 
     /**

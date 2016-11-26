@@ -1,48 +1,32 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Laravel</title>
+@extends('layouts.master')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-        <style>
-            html, body {
-                height: 100%;
-            }
+@section('title')
+    p4
+@stop
 
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
+@section('head')
+    <!-- head -->
+@stop
 
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
 
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Laravel 5</div>
-            </div>
+@section('content')
+    @if($title)
+    <div class="row">
+        <div class="col-xs-1 col-md-2"></div>
+        <div class="col-xs-10 col-md-8 container text-center">
+            <h2 class="article-title">{{ $title }}</h2>
         </div>
-        <input type="hidden" id="token" value="{{ csrf_token() }}">
+    </div>
+    @else
+        <h1>Home</h1>
+    @endif
 
-        <script src="{{asset('../js/jquery-3.1.1.min.js')}}"></script>
-        <script src="{{asset('../js/main.js')}}"></script>
-    </body>
-</html>
+    <input type="hidden" id="token" value="{{ csrf_token() }}">
+    <input type="hidden" id="recieve_token" value="{{ csrf_token() }}">
+@stop
+
+
+@section('body')
+    <!-- <input type="hidden" id="token" value="{{ csrf_token() }}">
+    <input type="hidden" id="recieve_token" value="{{ csrf_token() }}"> -->
+@stop

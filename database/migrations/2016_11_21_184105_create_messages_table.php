@@ -21,6 +21,7 @@ class CreateMessagesTable extends Migration
 
             # The rest of the fields...
             $table->text('message');
+            $table->boolean('recieved')->default(false);
         });
     }
 
