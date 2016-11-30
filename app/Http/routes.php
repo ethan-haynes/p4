@@ -13,7 +13,20 @@
 
 Route::get('/', function () { return view('welcome')->with('title', "Friendly Messenger"); });
 Route::get('/chatroom', function () { return view('chatroom')->with('title', "Friendly Messenger Chatroom"); });
+Route::get('/chatroom/{chatroom_id}', function ($chatroom_id) {
 
+    return view('chatroom')->with('title', $chatroom_id);
+});
+Route::get('/profile/{user_id}', function ($user_id) {
+
+    return view('welcome')->with('title', $user_id);
+});
+
+// public function showChatRoom()
+// {
+//     // show the form
+//     return View::make('chatroom');
+// }
 
 Route::post('/test', 'MessageController@test')->name('message.show');
 Route::post('/getTest', 'MessageController@getTest')->name('message.get');
