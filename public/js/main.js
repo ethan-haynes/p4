@@ -13,9 +13,7 @@
                 success: function(data){
                     console.log(data);
                 }, error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest);
-                    console.log("Status: " + textStatus);
-                    console.log("Error: " + errorThrown);
+                    logging(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
             event.preventDefault();
@@ -26,25 +24,34 @@
             $('#message-input').val('');
         });
 
-        setInterval(function () {
+        // check for a new message every second
+        setInterval(function (callback, logging) {
             $.ajax({
                 url: '/getTest',
                 type: "post",
                 data: {test: test, '_token': recieve_token},
                 success: function(messages){
-                    if (messages) {
-                        $('#chatbox').empty();
-                        for (var i = 0; i < messages.length; i++) {
-                                var newMessage = $("<div/>").html(messages[i].message).addClass('user');
-                                $('#chatbox').append(newMessage);
-                        }
-                    }
+                    callback(messages);
                 }, error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    console.log(XMLHttpRequest);
-                    console.log("Status: " + textStatus);
-                    console.log("Error: " + errorThrown);
+                    logging(XMLHttpRequest, textStatus, errorThrown);
                 }
             });
         }, 1000);
+
+        callback = function(message) {
+            if (messages) {
+                $('#chatbox').empty();
+                for (var i = 0; i < messages.length; i++) {
+                        var newMessage = $("<div/>").html(messages[i].message).addClass('user');
+                        $('#chatbox').append(newMessage);
+                }
+            }
+        };
+
+        logging = function(x, y, z) {
+            console.log(x);
+            console.log("Status: " + y);
+            console.log("Error: " + z);
+        };
     });
 })(jQuery);
