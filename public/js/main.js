@@ -13,7 +13,9 @@
                 success: function(data){
                     console.log(data);
                 }, error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    logging(XMLHttpRequest, textStatus, errorThrown);
+                    console.log(XMLHttpRequest);
+                    console.log("Status: " + textStatus);
+                    console.log("Error: " + errorThrown);
                 }
             });
             event.preventDefault();
@@ -25,20 +27,22 @@
         });
 
         // check for a new message every second
-        setInterval(function (callback, logging) {
+        setInterval(function () {
             $.ajax({
                 url: '/getTest',
                 type: "post",
                 data: {test: test, '_token': recieve_token},
-                success: function(messages){
-                    callback(messages);
+                success: function(data){
+                    callback(data);
                 }, error: function(XMLHttpRequest, textStatus, errorThrown) {
-                    logging(XMLHttpRequest, textStatus, errorThrown);
+                    console.log(XMLHttpRequest);
+                    console.log("Status: " + textStatus);
+                    console.log("Error: " + errorThrown);
                 }
             });
         }, 1000);
 
-        callback = function(message) {
+        function callback(messages) {
             if (messages) {
                 $('#chatbox').empty();
                 for (var i = 0; i < messages.length; i++) {
@@ -46,12 +50,6 @@
                         $('#chatbox').append(newMessage);
                 }
             }
-        };
-
-        logging = function(x, y, z) {
-            console.log(x);
-            console.log("Status: " + y);
-            console.log("Error: " + z);
-        };
+        }
     });
 })(jQuery);

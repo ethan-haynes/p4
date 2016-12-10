@@ -58,6 +58,5 @@
 
 
 @section('body')
-    <!-- <input type="hidden" id="token" value="{{ csrf_token() }}">
-    <input type="hidden" id="recieve_token" value="{{ csrf_token() }}"> -->
+    <script src="{{ URL::asset('js/main.js') }}" type="text/javascript"></script>
 @stop

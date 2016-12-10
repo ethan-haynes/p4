@@ -14,7 +14,7 @@
 Route::get('/', function () { return view('welcome')->with('title', "Friendly Messenger"); });
 Route::get('/chatroom/{chatroom_id?}', 'ChatroomController@showChatroom')->name('chatroom.show');
 Route::get('/profile/{user_id?}', 'ProfileController@showProfile')->name('profile.show');
-Route::get('/login', 'LoginController@showLogin')->name('login.show');
+// Route::get('/login', 'LoginController@showLogin')->name('login.show');
 
 Route::post('/test', 'MessageController@test')->name('message.show');
 Route::post('/getTest', 'MessageController@getTest')->name('message.get');
@@ -28,3 +28,8 @@ if(App::environment('local')) {
         return 'Dropped friendlyMessenger; created friendlyMessenger.';
     });
 };
+
+// generating all routes for Authentication
+Route::auth();
+Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+Route::get('/home', 'HomeController@index');

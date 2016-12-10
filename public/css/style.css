@@ -42,7 +42,7 @@ li[role="presentation"] a {
     color: #DBEAFE;
 }
 
-li[role="presentation"] a:hover {
+li[role="presentation"] a:hover, .links {
     background-color: #5CA7F2;
     color: #636AA2;
 }
@@ -51,7 +51,7 @@ li[role="presentation"] a:hover {
     visibility: hidden;
 }
 
-.navbar {
+.navbar, .panel-default > .panel-heading {
     background-color: #5CA7F2;
 }
 
@@ -150,4 +150,48 @@ div .other-users {
     padding-left: 0;
 }
 
+img {
+    background-color: #DBEAFE;
+    border: 2px solid #DBEAFE;
+    border-radius: 45px;
+    margin-top: -15px;
+}
+
+.dropdown-menu, .dropdown-menu li[role="presentation"] {
+    background-color: #DBEAFE;
+    border: none;
+    border-radius: 0 0 8px 8px;
+}
+.dropdown-menu:hover, li[role="presentation"] .dropdown-menu-color:hover {
+    background-color: #DBEAFE;
+    color: #636AA2;
+    border: none;
+}
+li[role="presentation"] .dropdown-menu-color {
+    background-color: #DBEAFE;
+    color: #5CA7F2;
+    border: none;
+}
+
+.navbar-default .navbar-nav > li[class="dropdown open"] > a:focus {
+    background-color: #DBEAFE;
+    border-radius: 10px 10px 0 0;
+    color:#5CA7F2;
+}
+
+.panel, .panel-heading, .panel-body, .panel-default {
+    background-color: #DBEAFE;
+    border: none;
+    box-shadow: 0 0 0 0;
+    text-align: center;
+}
+.panel-default > .panel-heading {
+    color: #DBEAFE;
+
+}
+
+.panel-body ul {
+    padding: 0;
+    margin: 0;
+}
 /*# sourceMappingURL=style.css.map */

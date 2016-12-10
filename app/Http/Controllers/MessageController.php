@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use p4\Http\Requests;
 use p4\Message;
 use p4\User;
+use Auth;
 
 class MessageController extends Controller
 {
@@ -57,10 +58,11 @@ class MessageController extends Controller
     public function test(Request $request) {
 
         $text = $request->input('message');
-        $user_id = User::where('user_name','=','friendly')->pluck('id')->first();
+        $user = Auth::user();
+        var_dump($user);
 
         $message = new Message();
-        $message->user_id = $user_id;
+        $message->user_id = $user->id;
         $message->message = $text;
         $message->recieved = false;
         $message->save();
@@ -69,7 +71,7 @@ class MessageController extends Controller
     }
 
     public function getTest(Request $request) {
-        $user = User::where('user_name','=','friendly')->first();
+        $user = Auth::user();
         $last_message = $user->last_message;
         if ($last_message) {
             $messages = Message::where('id','>=',$last_message)->orderBy('id', 'ASC')->limit(30)->get();
