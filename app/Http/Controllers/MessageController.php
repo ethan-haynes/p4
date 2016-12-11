@@ -5,9 +5,11 @@ namespace p4\Http\Controllers;
 use Illuminate\Http\Request;
 
 use p4\Http\Requests;
+use p4\Chatroom;
 use p4\Message;
 use p4\User;
 use Auth;
+use DB;
 
 class MessageController extends Controller
 {
@@ -55,32 +57,46 @@ class MessageController extends Controller
         return $test;
     }
 
-    public function test(Request $request) {
+    public function test(Request $request, $chatroom_id) {
+        if (!Auth::guest()) {
+            $text = $request->input('message');
+            $user = Auth::user();
+            $room_id = Chatroom::where('id', '=', $chatroom_id)->pluck('id')->first();
 
-        $text = $request->input('message');
-        $user = Auth::user();
-        var_dump($user);
+            $message = new Message();
+            $message->user_id = $user->id;
+            $message->message = $text;
+            $message->chatroom_id = $room_id;
+            $message->save();
 
-        $message = new Message();
-        $message->user_id = $user->id;
-        $message->message = $text;
-        $message->recieved = false;
-        $message->save();
-
-        return $message;
+            return $message;
+        }
     }
 
-    public function getTest(Request $request) {
+    public function getTest(Request $request, $chatroom_id) {
         $user = Auth::user();
         $last_message = $user->last_message;
+
         if ($last_message) {
-            $messages = Message::where('id','>=',$last_message)->orderBy('id', 'ASC')->limit(30)->get();
+            $messages = DB::table('users')
+            ->join('messages', 'users.id', '=', 'messages.user_id')
+            ->where('messages.chatroom_id', '=', $chatroom_id)
+            ->where('messages.id', '>=', $last_message)
+            ->select('users.name', 'messages.message')
+            ->orderBy('messages.id', 'ASC')
+            ->limit(30)
+            ->get();
         } else {
-            $messages = Message::orderBy('id', 'ASC')->first();
+            $messages = DB::table('users')
+            ->join('messages', 'users.id', '=', 'messages.user_id')
+            ->where('messages.chatroom_id', '=', $chatroom_id)
+            ->select('users.name', 'messages.message', 'messages.id')
+            ->orderBy('messages.id', 'DES')
+            ->first();
+
             $user->last_message = $messages->id;
             $user->save();
         }
-
         return $messages;
     }
 

@@ -2,8 +2,8 @@
 <html>
 <head>
     <title>
-        {{-- Yield the title if it exists, otherwise default to 'P3' --}}
-        @yield('title','P3')
+        {{-- Yield the title if it exists, otherwise default to 'P4' --}}
+        @yield('title','P4')
     </title>
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -38,8 +38,8 @@
                             </button>
 
                             <!-- Branding Image -->
-                            <a class="navbar-brand" href="{{ url('/') }}">
-                                <img src="telegram (1).png" alt="" />
+                            <a class="navbar-brand" href="{{ url('/home') }}">
+                                <img src="{{ URL::asset('images/telegram (1).png') }}" alt="" />
 
                             </a>
                         </div>
@@ -64,6 +64,7 @@
 
                                         <ul class="dropdown-menu" role="menu">
                                             <li role="presentation"><a href="{{ url('/logout') }}" class="dropdown-menu-color">Logout</a></li>
+                                            <li role="presentation"><a href="{{ url('/profile') }}" class="dropdown-menu-color">Profile</a></li>
                                         </ul>
                                     </li>
                                 @endif
@@ -79,19 +80,21 @@
     </header>
     <div>
         <div class="row">
-            <div class="col-xs-12 col-md-12 container text-center title">
-                <a href="/chatroom">chatroom</a>
-                <a href="/profile">profile</a>
-            </div>
-        </div>
-        <div class="row">
             <!-- main column left -->
             <div class="col-xs-1 col-md-2"></div>
             <!-- main column center -->
             <div class="col-xs-10 col-md-8 container text-center">
                 <h1 class="title">
-                    p4
+                    Friendly Messenger
                 </h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-md-12 container text-center title">
+                <a href="/chatrooms">chatrooms</a>
+                @if (Auth::check())
+                    <a href="/profile">profile</a>
+                @endif
             </div>
         </div>
     </div>

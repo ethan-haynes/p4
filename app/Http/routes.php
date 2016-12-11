@@ -11,13 +11,13 @@
 |
 */
 
-Route::get('/', function () { return view('welcome')->with('title', "Friendly Messenger"); });
+Route::get('/', function () { return view('home')->with('title', "Friendly Messenger"); });
 Route::get('/chatroom/{chatroom_id?}', 'ChatroomController@showChatroom')->name('chatroom.show');
 Route::get('/profile/{user_id?}', 'ProfileController@showProfile')->name('profile.show');
-// Route::get('/login', 'LoginController@showLogin')->name('login.show');
+Route::get('/chatrooms', 'ChatroomController@showChatrooms')->name('chatrooms.show');
 
-Route::post('/test', 'MessageController@test')->name('message.show');
-Route::post('/getTest', 'MessageController@getTest')->name('message.get');
+Route::post('/test/{chatroom_id}', 'MessageController@test')->name('message.show');
+Route::post('/getTest/{chatroom_id}', 'MessageController@getTest')->name('message.get');
 
 if(App::environment('local')) {
     Route::get('/drop', function() {
@@ -32,4 +32,6 @@ if(App::environment('local')) {
 // generating all routes for Authentication
 Route::auth();
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
+// Route::get('/', function () { return view('home')->with('title', "Friendly Messenger"); });
 Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');

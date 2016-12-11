@@ -19,7 +19,13 @@
                 <div>
                     <h2 class="article-title">{{ $title }}</h2>
                     <div class="half-line"></div>
-                    <div>Powered by Magic &amp; Bubble Yum</div>
+                    <div>
+                        @if($description)
+                            {{ $description }}
+                        @else
+                            Powered by Magic &amp; Bubble Yum
+                        @endif
+                    </div>
                 </div>
                 @if(count($errors) > 0)
                     <ul>
@@ -43,7 +49,7 @@
                 </form>
                 <div>
                     <div class="line"></div>
-                    Please use a valid number between 1-9 or bad things will happen
+                    Please keep the language clean. People eat here.
                     <em class="note">*</em>
                 </div>
             </div>
