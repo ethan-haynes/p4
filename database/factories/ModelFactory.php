@@ -15,6 +15,7 @@ $factory->define(p4\User::class, function (Faker\Generator $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->safeEmail,
+        'user_name' => $faker->str_random(14),
         'password' => bcrypt(str_random(10)),
         'remember_token' => str_random(10),
     ];

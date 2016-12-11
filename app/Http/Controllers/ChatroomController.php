@@ -11,16 +11,15 @@ use View;
 
 class ChatroomController extends Controller
 {
-    public function showChatroom($chatroom_id = '')
+    public function showChatroom(Request $request, $chatroom_id = '')
     {
         # default name
         $room = "Friendly Messenger Chatroom";
         if ($chatroom_id != null) {
-            if (Auth::check()) {
-                $user = Auth::user();
-                $user->last_message = null;
-                $user->save();
+            if ($request->session()->has('last_message')) {
+                session(['last_message' => null]);
             }
+
             $chatroom = Chatroom::where('id', '=', $chatroom_id)->first();
             $room = $chatroom->name;
         }

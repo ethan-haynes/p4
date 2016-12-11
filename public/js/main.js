@@ -44,11 +44,13 @@
         }, 1000);
 
         function callback(messages) {
+            console.log(messages);
             if (messages) {
                 $('#chatbox').empty();
                 messages.map(function(obj) {
-                        var newMessage = $("<div/>").html(obj.name + ": " + obj.message).addClass('other-users');
-                        $('#chatbox').append(newMessage);
+                        var newMessage = $("<div/>").html(obj.user_name + ": " + obj.message).addClass('other-users');
+                        // have to add to first because items come back in reverse order
+                        $('#chatbox').prepend(newMessage);
                     });
             }
         }

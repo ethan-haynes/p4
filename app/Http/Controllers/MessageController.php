@@ -74,28 +74,25 @@ class MessageController extends Controller
     }
 
     public function getTest(Request $request, $chatroom_id) {
-        $user = Auth::user();
-        $last_message = $user->last_message;
 
-        if ($last_message) {
+        if ($request->session()->has('last_message')) {
             $messages = DB::table('users')
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
-            ->where('messages.id', '>=', $last_message)
-            ->select('users.name', 'messages.message')
-            ->orderBy('messages.id', 'ASC')
+            ->where('messages.id', '>=', session('last_message'))
+            ->select('users.user_name', 'messages.message')
+            ->orderBy('messages.id', 'DES')
             ->limit(30)
             ->get();
         } else {
             $messages = DB::table('users')
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
-            ->select('users.name', 'messages.message', 'messages.id')
+            ->select('users.user_name', 'messages.message', 'messages.id')
             ->orderBy('messages.id', 'DES')
             ->first();
 
-            $user->last_message = $messages->id;
-            $user->save();
+            session(['last_message' => $messages->id]);
         }
         return $messages;
     }
