@@ -48,6 +48,10 @@
                             <!-- Left Side Of Navbar -->
                             <ul class="nav navbar-nav">
                                 <li role="presentation" ><a href="{{ url('/home') }}">Home</a></li>
+                                <li role="presentation" ><a href="{{ url('/chatrooms') }}">Chatrooms</a></li>
+                                @if (Auth::check())
+                                    <li role="presentation" ><a href="{{ url('/profile') }}">My Profile</a></li>
+                                @endif
                             </ul>
 
                             <!-- Right Side Of Navbar -->
@@ -87,14 +91,6 @@
                 <h1 class="title">
                     Friendly Messenger
                 </h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12 col-md-12 container text-center title">
-                <a href="/chatrooms">chatrooms</a>
-                @if (Auth::check())
-                    <a href="/profile">profile</a>
-                @endif
             </div>
         </div>
     </div>

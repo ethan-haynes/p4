@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use p4\Http\Requests;
 use p4\Chatroom;
+use Session;
 use Auth;
 use View;
 
@@ -28,6 +29,39 @@ class ChatroomController extends Controller
 
     public function showChatrooms()
     {
+        $chatrooms = Chatroom::all();
+        return View::make('chatrooms')->with('title', "Chatrooms")->with( "chatrooms" , $chatrooms);
+    }
+
+    public function createForm()
+    {
+        return View::make('createChatroom')->with('title', "Create a Chatroom");
+    }
+
+    public function create(Request $request)
+    {
+        $this->validate($request, [
+            'name' => 'required|min:1|max:50|unique:users',
+            'description' => 'required|min:1|max:255',
+        ]);
+
+        if (!Auth::guest()) {
+            $name = $request->input('name');
+            $description = $request->input('description');
+
+            $user = Auth::user();
+
+            $chatroom = new Chatroom();
+            $chatroom->name = $name;
+            $chatroom->description = $description;
+            $chatroom->save();
+            
+            $chatroom->user()->attach($user->id);
+        } else {
+            Session::flash('flash_view', 'You need to be logged in for that feature.');
+            return redirect('/chatrooms/create');
+        }
+
         $chatrooms = Chatroom::all();
         return View::make('chatrooms')->with('title', "Chatrooms")->with( "chatrooms" , $chatrooms);
     }

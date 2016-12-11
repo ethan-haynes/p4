@@ -42,7 +42,7 @@
                     <div class="chat-container" id="chatbox">
                         <!-- chat messages appended here -->
                     </div>
-                        <input type="text" name="message" value="..." id="message-input">
+                        <input type="text" name="message" id="message-input" placeholder="...">
                         <input type="submit" class="btn btn-info">
                         <br>
                         <br>

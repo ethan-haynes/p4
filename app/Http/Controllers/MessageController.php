@@ -80,7 +80,7 @@ class MessageController extends Controller
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
             ->where('messages.id', '>=', session('last_message'))
-            ->select('users.user_name', 'messages.message')
+            ->select('users.user_name', 'messages.message', 'messages.id', 'messages.user_id')
             ->orderBy('messages.id', 'DES')
             ->limit(30)
             ->get();
@@ -88,11 +88,14 @@ class MessageController extends Controller
             $messages = DB::table('users')
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
-            ->select('users.user_name', 'messages.message', 'messages.id')
+            ->select('users.user_name', 'messages.message', 'messages.id', 'messages.user_id')
             ->orderBy('messages.id', 'DES')
-            ->first();
+            ->limit(1)
+            ->get(); /* using this method instead of first because laravel
+                        complains about returning object instead of array in
+                        request */
 
-            session(['last_message' => $messages->id]);
+            session(['last_message' => $messages[0]->id]);
         }
         return $messages;
     }

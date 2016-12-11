@@ -15,7 +15,7 @@
                         @endforeach
                         </ul>
                     @endif
-                    <form class="" action="{{ url('/home') }}" method="get">
+                    <form class="" action="{{ url('/chatrooms/create') }}" method="get">
                         <div class="form-group">
                             <div class="col-md-12 col-md-offset-5">
                                 <button type="submit" class="btn btn-info">

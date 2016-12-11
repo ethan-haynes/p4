@@ -20,7 +20,7 @@
                 }
             });
             event.preventDefault();
-            $('#message-input').val('...');
+            $('#message-input').val('');
         });
 
         $('#message-input').click( function() {
@@ -44,11 +44,12 @@
         }, 1000);
 
         function callback(messages) {
-            console.log(messages);
             if (messages) {
                 $('#chatbox').empty();
                 messages.map(function(obj) {
-                        var newMessage = $("<div/>").html(obj.user_name + ": " + obj.message).addClass('other-users');
+                        var newMessage = $("<div/>").html(
+                            "<a href='/profile/"+ obj.user_id +"'>" + obj.user_name  + "</a>" +
+                            ": " + obj.message).addClass('other-users');
                         // have to add to first because items come back in reverse order
                         $('#chatbox').prepend(newMessage);
                     });
