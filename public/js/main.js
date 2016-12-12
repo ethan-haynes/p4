@@ -8,7 +8,7 @@
 
         $('form').submit(function( event ) {
             $.ajax({
-                url: '/test/' + room,
+                url: '/sendMessage/' + room,
                 type: "post",
                 data: {message: $('#message-input').val(), '_token': token},
                 success: function(data){
@@ -30,7 +30,7 @@
         // check for a new message every second
         setInterval(function () {
             $.ajax({
-                url: '/getTest/' + room,
+                url: '/getMessage/' + room,
                 type: "post",
                 data: {test: test, '_token': recieve_token},
                 success: function(data){

@@ -57,7 +57,7 @@ class MessageController extends Controller
         return $test;
     }
 
-    public function test(Request $request, $chatroom_id) {
+    public function sendMessage(Request $request, $chatroom_id) {
         if (!Auth::guest()) {
             $text = $request->input('message');
             $user = Auth::user();
@@ -73,7 +73,7 @@ class MessageController extends Controller
         }
     }
 
-    public function getTest(Request $request, $chatroom_id) {
+    public function getMessage(Request $request, $chatroom_id) {
 
         if ($request->session()->has('last_message')) {
             $messages = DB::table('users')
