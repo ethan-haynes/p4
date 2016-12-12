@@ -19,7 +19,12 @@ class ProfileController extends Controller
             $user = ($user_id != null) ? User::where('id', '=', $user_id)->first() : Auth::user();
 
             if ($user->profile == null) {
-                return View::make('createProfile')->with('title', "Profile");
+                if (Auth::user()->id == $user->id) {
+                    return View::make('createProfile')->with('title', "Profile");
+                } else {
+                    Session::flash('flash_view', $user->user_name . ' has not set up a profile yet.');
+                    return redirect()->back();
+                }
             }
 
             return View::make('profile')->with('title', "Profile")->with('user', $user);
@@ -52,5 +57,25 @@ class ProfileController extends Controller
             Session::flash('flash_view', 'You need to be logged in for that feature.');
             return redirect('/login');
         }
+    }
+    public function showUpdate()
+    {
+        return View::make('updateProfile')->with('title', "Update Profile")->with('user', Auth::user());
+    }
+
+    public function submitUpdate(Request $request)
+    {
+        $this->validate($request, [
+            'description' => 'required|min:1|max:255',
+        ]);
+
+        $description = $request->input('description');
+        $user = Auth::user();
+
+        $profile = $user->profile;
+        $profile->description = $description;
+        $profile->save();
+
+        return View::make('profile')->with('title', "Update Profile")->with('user', $user);
     }
 }

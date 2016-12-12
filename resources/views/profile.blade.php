@@ -49,9 +49,9 @@
 
                     </div>
 
+                    @if(Auth::user()->id == $user->id)
                     <div class="panel-body">
-
-                        <form class="" action="{{ url('/chatrooms/create') }}" method="get">
+                        <form class="" action="{{ url('/profile/update') }}" method="get">
                             <div class="form-group">
                                 <div class="col-md-offset-11">
                                     <button type="submit" class="btn btn-info">
@@ -61,6 +61,7 @@
                             </div>
                         </form>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>

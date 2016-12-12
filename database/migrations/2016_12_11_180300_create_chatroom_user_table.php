@@ -16,8 +16,8 @@ class CreateChatroomUserTable extends Migration
              $table->integer('chatroom_id')->unsigned();
 
              # Make foreign keys
-             $table->foreign('user_id')->references('id')->on('users');
-             $table->foreign('chatroom_id')->references('id')->on('chatrooms');
+             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');;
+             $table->foreign('chatroom_id')->references('id')->on('chatrooms')->onDelete('cascade');;
          });
      }
 

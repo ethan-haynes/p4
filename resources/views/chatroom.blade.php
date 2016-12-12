@@ -52,6 +52,11 @@
                     Please keep the language clean. People eat here.
                     <em class="note">*</em>
                 </div>
+                @if(Session::get('flash_view') != null)
+                <div class="alert alert-danger">
+                    <strong>Tarnation!</strong> {{Session::get('flash_view')}}
+                </div>
+                @endif
             </div>
             <div class="col-xs-1 col-md-2"></div>
         </div>

@@ -14,10 +14,14 @@
 Route::get('/', function () { return view('home')->with('title', "Friendly Messenger"); });
 Route::get('/chatroom/{chatroom_id?}', 'ChatroomController@showChatroom')->name('chatroom.show');
 Route::post('/profile/create', 'ProfileController@create')->name('profile.create');
-Route::get('/profile/{user_id?}', 'ProfileController@showProfile')->name('profile.show');
+Route::get('/profile/update', 'ProfileController@showUpdate')->name('profile.updateShow');
+Route::post('/profile/submit', 'ProfileController@submitUpdate')->name('profile.submitUpdate');
+Route::get('/profile/{user_id?}', 'ProfileController@showProfile')->name('profile.profileShow');
 Route::get('/chatrooms', 'ChatroomController@showChatrooms')->name('chatrooms.show');
-Route::get('/chatrooms/create', 'ChatroomController@createForm')->name('chatrooms.show');
+Route::get('/chatrooms/create', 'ChatroomController@createForm')->name('chatrooms.createShow');
 Route::post('/chatrooms', 'ChatroomController@create')->name('chatrooms.create');
+Route::get('/delete/confirm', 'DeleteController@showConfirmDelete')->name('delete.show');
+Route::post('/delete', 'DeleteController@delete')->name('delete.delete');
 
 Route::post('/test/{chatroom_id}', 'MessageController@test')->name('message.show');
 Route::post('/getTest/{chatroom_id}', 'MessageController@getTest')->name('message.get');

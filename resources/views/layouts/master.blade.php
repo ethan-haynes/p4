@@ -69,6 +69,9 @@
                                         <ul class="dropdown-menu" role="menu">
                                             <li role="presentation"><a href="{{ url('/logout') }}" class="dropdown-menu-color">Logout</a></li>
                                             <li role="presentation"><a href="{{ url('/profile') }}" class="dropdown-menu-color">Profile</a></li>
+                                            <li role="presentation" >
+                                                <a href="{{ url('/delete/confirm') }}" class="dropdown-menu-color">Delete Account</a>
+                                            </li>
                                         </ul>
                                     </li>
                                 @endif
@@ -108,6 +111,5 @@
 
     {{-- Yield any page specific JS files or anything else you might want at the end of the body --}}
     @yield('body')
-
 </body>
 </html>

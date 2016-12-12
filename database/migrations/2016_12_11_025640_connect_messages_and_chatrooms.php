@@ -8,7 +8,7 @@ class ConnectMessagesAndChatrooms extends Migration
     public function up() {
         Schema::table('messages', function (Blueprint $table) {
             $table->integer('chatroom_id')->unsigned();
-            $table->foreign('chatroom_id')->references('id')->on('chatrooms');
+            $table->foreign('chatroom_id')->references('id')->on('chatrooms')->onDelete('cascade');;
         });
     }
 

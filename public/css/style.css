@@ -211,4 +211,17 @@ li[class="list-group-item list-group-item-info"] {
     background-color: #5CA7F2;
 }
 
+.flex {
+    display: flex;
+}
+.flex button {
+    margin-left: 45px;
+}
+
+.visible {
+    visibility: hidden;
+    margin: 4px;
+    padding: 3px;
+}
+
 /*# sourceMappingURL=style.css.map */
