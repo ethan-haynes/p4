@@ -12,17 +12,17 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => "test",
+            'email' => 'test@gmail.com',
             'password' => bcrypt('secret'),
-            'user_name' => str_random(10),
+            'user_name' => 'Ima Tester',
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         ]);
 
         DB::table('users')->insert([
-            'name' => str_random(10),
-            'email' => str_random(10).'@gmail.com',
+            'name' => "Friendly Guy",
+            'email' => 'friendly@gmail.com',
             'password' => bcrypt('secret'),
             'user_name' => 'friendly',
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
@@ -34,6 +34,24 @@ class UsersTableSeeder extends Seeder
             'email' => 'ethan@gmail.com',
             'password' => bcrypt('123456'),
             'user_name' => 'sleepy',
+            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => "Jill",
+            'email' => 'jill@harvard.edu',
+            'password' => bcrypt('helloworld'),
+            'user_name' => 'Jill_Harvard',
+            'created_at' => Carbon\Carbon::now()->toDateTimeString(),
+            'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
+        ]);
+
+        DB::table('users')->insert([
+            'name' => "Jamal",
+            'email' => 'jamal@harvard.edu',
+            'password' => bcrypt('helloworld'),
+            'user_name' => 'Jamal_Harvard',
             'created_at' => Carbon\Carbon::now()->toDateTimeString(),
             'updated_at' => Carbon\Carbon::now()->toDateTimeString(),
         ]);

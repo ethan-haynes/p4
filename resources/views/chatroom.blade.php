@@ -57,6 +57,11 @@
                     <strong>Tarnation!</strong> {{Session::get('flash_view')}}
                 </div>
                 @endif
+                @if(Session::get('flash_warning') != null)
+                <div class="alert alert-danger">
+                    <strong>Note!</strong> {{Session::get('flash_warning')}}
+                </div>
+                @endif
             </div>
             <div class="col-xs-1 col-md-2"></div>
         </div>

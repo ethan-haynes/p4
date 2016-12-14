@@ -24,6 +24,9 @@ class ChatroomController extends Controller
             $chatroom = Chatroom::where('id', '=', $chatroom_id)->first();
             $room = $chatroom->name;
         }
+        if (Auth::guest()) {
+            Session::flash('flash_warning', 'Only logged in users can post messages to the chatroom.');
+        }
         return View::make('chatroom')->with('title', $room)->with('description', $chatroom->description);
     }
 
@@ -55,7 +58,7 @@ class ChatroomController extends Controller
             $chatroom->name = $name;
             $chatroom->description = $description;
             $chatroom->save();
-            
+
             $chatroom->user()->attach($user->id);
         } else {
             Session::flash('flash_view', 'You need to be logged in for that feature.');
