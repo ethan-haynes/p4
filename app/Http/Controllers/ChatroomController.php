@@ -16,7 +16,10 @@ class ChatroomController extends Controller
     {
         # default name
         $room = "Friendly Messenger Chatroom";
+
+        # check if they entered chatroom via chatrooms link
         if ($chatroom_id != null) {
+            # reset last message recieved to null when they land on page
             if ($request->session()->has('last_message')) {
                 session(['last_message' => null]);
             }
@@ -24,6 +27,7 @@ class ChatroomController extends Controller
             $chatroom = Chatroom::where('id', '=', $chatroom_id)->first();
             $room = $chatroom->name;
         }
+        # warning for users who are not logged in
         if (Auth::guest()) {
             Session::flash('flash_warning', 'Only logged in users can post messages to the chatroom.');
         }
@@ -43,11 +47,13 @@ class ChatroomController extends Controller
 
     public function create(Request $request)
     {
+        # validation for new chatroom
         $this->validate($request, [
             'name' => 'required|min:1|max:50|unique:users',
             'description' => 'required|min:1|max:255',
         ]);
 
+        # check if they are a guest
         if (!Auth::guest()) {
             $name = $request->input('name');
             $description = $request->input('description');
@@ -61,6 +67,7 @@ class ChatroomController extends Controller
 
             $chatroom->user()->attach($user->id);
         } else {
+            # if they are a guest, send them a message and redirect
             Session::flash('flash_view', 'You need to be logged in for that feature.');
             return redirect('/chatrooms/create');
         }

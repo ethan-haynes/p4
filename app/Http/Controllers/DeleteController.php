@@ -16,6 +16,7 @@ class DeleteController extends Controller
         return View::make('confirmDelete')->with('title', "Confirm Delete");
     }
 
+    # deletes user and its relations recursively
     public function delete()
     {
         $user = Auth::user();

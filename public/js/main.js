@@ -1,12 +1,13 @@
 (function($) {
-    var test = "it worked",
-        token = $('#token').val(),
-        recieve_token = $('#recieve_token').val(),
-        room = window.location.pathname.split("/").pop();
+    var token = $('#token').val(),
+        recieve_token = $('#recieve_token').val(), // getting laravel post token
+        room = window.location.pathname.split("/").pop(); // getting path
 
     $(function() {
 
+        // when the button is clicked to send a message
         $('form').submit(function( event ) {
+            // ajax call is made
             $.ajax({
                 url: '/sendMessage/' + room,
                 type: "post",
@@ -32,7 +33,7 @@
             $.ajax({
                 url: '/getMessage/' + room,
                 type: "post",
-                data: {test: test, '_token': recieve_token},
+                data: {'_token': recieve_token},
                 success: function(data){
                     callback(data);
                 }, error: function(XMLHttpRequest, textStatus, errorThrown) {
@@ -43,10 +44,12 @@
             });
         }, 1000);
 
+        // callback used to handle response
         function callback(messages) {
             if (messages) {
                 $('#chatbox').empty();
                 messages.map(function(obj) {
+                        // greate a new div with correct style on it
                         var newMessage = $("<div/>").html(
                             "<a href='/profile/"+ obj.user_id +"'>" + obj.user_name  + "</a>" +
                             ": " + obj.message).addClass('other-users');

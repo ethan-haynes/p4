@@ -13,56 +13,16 @@ use DB;
 
 class MessageController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        $test = Input::get('test');
-
-        return $test;
-    }
 
     public function sendMessage(Request $request, $chatroom_id) {
+
         if (!Auth::guest()) {
+            # get message from ajax call
             $text = $request->input('message');
             $user = Auth::user();
             $room_id = Chatroom::where('id', '=', $chatroom_id)->pluck('id')->first();
 
+            # create new message with ussr_id chatroom_id and message text
             $message = new Message();
             $message->user_id = $user->id;
             $message->message = $text;
@@ -75,7 +35,11 @@ class MessageController extends Controller
 
     public function getMessage(Request $request, $chatroom_id) {
 
+        # if user has a last message in session
         if ($request->session()->has('last_message')) {
+            # get the messages table
+            # join with users table
+            # return all messages since last message recieved
             $messages = DB::table('users')
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
@@ -84,7 +48,12 @@ class MessageController extends Controller
             ->orderBy('messages.id', 'DES')
             ->limit(30)
             ->get();
+
+        # if user does not have a last message in session
         } else {
+            # get the messages table
+            # join with users table
+            # return latest message
             $messages = DB::table('users')
             ->join('messages', 'users.id', '=', 'messages.user_id')
             ->where('messages.chatroom_id', '=', $chatroom_id)
@@ -98,39 +67,5 @@ class MessageController extends Controller
             session(['last_message' => $messages[0]->id]);
         }
         return $messages;
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

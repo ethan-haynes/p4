@@ -16,11 +16,16 @@ class ProfileController extends Controller
     public function showProfile($user_id = '')
     {
         if (!Auth::guest()) {
+            # if no id is provided get logged in user's profile
             $user = ($user_id != null) ? User::where('id', '=', $user_id)->first() : Auth::user();
 
+            # user does not have a profile yet:
             if ($user->profile == null) {
+                # take user to make their own profile
                 if (Auth::user()->id == $user->id) {
                     return View::make('createProfile')->with('title', "Profile");
+
+                # warn that user who's profile they are selecting doesn't have one set up
                 } else {
                     Session::flash('flash_view', $user->user_name . ' has not set up a profile yet.');
                     return redirect()->back();
@@ -30,12 +35,14 @@ class ProfileController extends Controller
             return View::make('profile')->with('title', "Profile")->with('user', $user);
         }
 
+        # warn a user not logged in who is trying to view a profile
         Session::flash('flash_view', 'You need to be logged in for that feature.');
         return redirect('/login');
     }
 
     public function create(Request $request)
     {
+        # validate and create new profile
         $this->validate($request, [
             'description' => 'required|min:1|max:255',
         ]);
@@ -65,6 +72,7 @@ class ProfileController extends Controller
 
     public function submitUpdate(Request $request)
     {
+        # update existing profile
         $this->validate($request, [
             'description' => 'required|min:1|max:255',
         ]);

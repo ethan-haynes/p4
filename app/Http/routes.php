@@ -26,16 +26,6 @@ Route::post('/delete', 'DeleteController@delete')->name('delete.delete');
 Route::post('/sendMessage/{chatroom_id}', 'MessageController@sendMessage')->name('message.create');
 Route::post('/getMessage/{chatroom_id}', 'MessageController@getMessage')->name('message.show');
 
-if(App::environment('local')) {
-    Route::get('/drop', function() {
-
-        DB::statement('DROP database friendlyMessenger');
-        DB::statement('CREATE database friendlyMessenger');
-
-        return 'Dropped friendlyMessenger; created friendlyMessenger.';
-    });
-};
-
 // generating all routes for Authentication
 Route::auth();
 Route::get('logout', 'Auth\AuthController@logout')->name('logout');
