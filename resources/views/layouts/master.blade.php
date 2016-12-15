@@ -39,7 +39,7 @@
 
                             <!-- Branding Image -->
                             <a class="navbar-brand" href="{{ url('/home') }}">
-                                <img src="{{ URL::asset('images/telegram (1).png') }}" alt="" />
+                                <img src="{{ URL::asset('images/telegram.png') }}" alt="" />
 
                             </a>
                         </div>
